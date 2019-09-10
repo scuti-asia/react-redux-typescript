@@ -1,22 +1,18 @@
-import React, { Component } from "react";
-import Routes from "./AppRoutes";
-import "./App.css";
-import Header from "../../Components/Header";
+import React, {Component} from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import AdminLayout from '../../Containers/Admin';
+import HomePage from '../HomePage';
+import "./App.scss";
 
 class App extends Component {
-  private menuItems = [
-    {
-      title: "Example",
-      href: "/example"
-    }
-  ];
-
   render() {
     return (
-      <div className="App">
-        <Header pageTitle="React Boilerplate" menuItems={this.menuItems} />
-        <Routes />
-      </div>
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" name="Home" component={HomePage} />
+          <Route path="/admin" name="Admin" component={AdminLayout} />
+        </Switch>
+      </HashRouter>
     );
   }
 }

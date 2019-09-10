@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import TodoListComponent, { TodoList } from "./TodoList";
 import TodoFormComponent from "./TodoForm";
-import { Container, Row, Button } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import TodoFilterComponent from "./TodoFilter";
+import Container from '../AdminLayout';
 
 export interface Props {
   filter: string;
@@ -29,7 +30,9 @@ export default class TodoComponent extends Component<Props> {
     });
 
     return (
-      <Container>
+      <Container
+        pageTitle="Todo"
+      >
         <Row className="justify-content-md-center">
           <TodoFormComponent onAddTodo={this.props.addTodoItem} />
           <TodoListComponent

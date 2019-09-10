@@ -1,0 +1,77 @@
+
+// Import styles with default layout.
+@import "~@coreui/coreui/scss/coreui.scss";
+
+// Spinkit
+$spinkit-spinner-color: $body-color;
+// $spinkit-spinner-color: $body-color;
+@import '~spinkit/scss/spinkit.scss';
+
+.navbar-brand {
+  margin-left: auto;
+  font-size: 0.875rem;
+
+  span {
+    display: none;
+  }
+}
+
+.brand-minimized .navbar-brand > span {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .navbar-brand {
+    margin-left: 1em;
+
+    span {
+      display: inline;
+    }
+
+    img {
+      margin-right: 0.25em;
+    }
+  }
+}
+
+.sidebar-nav {
+  .nav-dropdown-items {
+    li:first-child {
+      box-shadow: 0 5px 5px rgba(0,0,0,0.25) inset;
+    }
+    li:last-child {
+      box-shadow: 0 -3px 5px rgba(0,0,0,0.25) inset;
+    }
+  }
+}
+
+.Toastify__toast--default {
+  color: #555 !important;
+}
+
+audio.recorded-audio {
+  width: 182px;
+  height: 34px;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.rotateLogo {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  max-height: 200px;
+  animation: r1 1s linear infinite;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}

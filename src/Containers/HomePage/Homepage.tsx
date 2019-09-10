@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import Header from "../../Components/Header";
 
 class Homepage extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+        <Header
+          pageTitle="Home"
+        />
         <p>Homepage</p>
       </div>
     );
