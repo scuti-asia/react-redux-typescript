@@ -30,7 +30,7 @@ const Header: FunctionComponent = () => {
                   }
                     id="basic-nav-dropdown"
                   >
-                    <NavDropdown.Item tag={Link} href="logout">Logout</NavDropdown.Item>
+                    <NavDropdown.Item ><Link to="/admin/logout">Logout</Link></NavDropdown.Item>
                   </NavDropdown>
                 </AppHeaderDropdown>
               </Nav>

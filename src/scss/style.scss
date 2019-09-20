@@ -6,6 +6,7 @@
 $spinkit-spinner-color: $body-color;
 // $spinkit-spinner-color: $body-color;
 @import '~spinkit/scss/spinkit.scss';
+$bg: url('https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1920/https://ireaco.com/wp-content/uploads/2019/03/cropped-books-business-computer-459654-1.jpg');
 
 .navbar-brand {
   margin-left: auto;
@@ -75,3 +76,16 @@ audio.recorded-audio {
     height: 100%;
   }
 }
+
+.fade.modal.show {
+  background-color: #F7F7F7;
+  color: #73879C;
+  font-weight: 600;
+  box-shadow: 5px 10px;
+  background-image: $bg;
+  background-size: cover;
+  .modal-content {
+    opacity: 0.9;
+  }
+}
+

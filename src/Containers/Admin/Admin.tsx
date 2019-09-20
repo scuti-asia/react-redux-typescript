@@ -13,6 +13,7 @@ import {
 } from '@coreui/react';
 
 import { AdminFooter, AdminHeader } from '../../Components/AdminLayout';
+import { Authority } from '../../Containers/Auth'
 import routes from './AdminRoutes';
 import navigation from './AdminNavigation';
 
@@ -27,45 +28,47 @@ class AdminLayoutComponent extends Component {
 
   render() {
     return (
-      <div className="app">
-        <AppHeader fixed>
-          <Suspense fallback={this.loading()}>
-            <AdminHeader/>
-          </Suspense>
-        </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
-            <AppSidebarHeader/>
-            <AppSidebarForm/>
+      <Authority>
+        <div className="app">
+          <AppHeader fixed>
             <Suspense fallback={this.loading()}>
-              <AppSidebarNav navConfig={{items: navigation}} {...this.props} />
+              <AdminHeader />
             </Suspense>
-            <AppSidebarFooter/>
-            <AppSidebarMinimizer/>
-          </AppSidebar>
-          <Switch>
-            {routes.map((route, idx) => {
-                return route.component ? (
-                  <Route
-                    key={idx}
-                    path={route.path}
-                    exact={route.exact}
-                    render={props => (
-                      <route.component {...props} />
-                    )} 
-                  />)
-                  : (null);
-              },
-            )}
-            <Redirect from="/" to="/admin" />
-          </Switch>
+          </AppHeader>
+          <div className="app-body">
+            <AppSidebar fixed display="lg">
+              <AppSidebarHeader/>
+              <AppSidebarForm/>
+              <Suspense fallback={this.loading()}>
+                <AppSidebarNav navConfig={{items: navigation}} {...this.props} />
+              </Suspense>
+              <AppSidebarFooter/>
+              <AppSidebarMinimizer/>
+            </AppSidebar>
+            <Switch>
+              {routes.map((route, idx) => {
+                  return route.component ? (
+                    <Route
+                      key={idx}
+                      path={route.path}
+                      exact={route.exact}
+                      render={props => (
+                        <route.component {...props} />
+                      )} 
+                    />)
+                    : (null);
+                },
+              )}
+              <Redirect from="/" to="/admin" />
+            </Switch>
+          </div>
+          <AppFooter>
+            <Suspense fallback={this.loading()}>
+              <AdminFooter/>
+            </Suspense>
+          </AppFooter>
         </div>
-        <AppFooter>
-          <Suspense fallback={this.loading()}>
-            <AdminFooter/>
-          </Suspense>
-        </AppFooter>
-      </div>
+      </Authority>
     )
   }
 }

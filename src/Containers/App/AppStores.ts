@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, Store, compose } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./AppReducers";
+import storage from 'redux-persist/es/storage';
+import {persistReducer, persistStore} from 'redux-persist';
+import rootReducer, { initialState } from "./AppReducers";
 import { ApplicationState } from "./AppTypes";
 
-export default function configureStore(
+export function configureStore(
   initialState: ApplicationState
 ): Store<ApplicationState> {
   let composeEnhancers;
@@ -19,5 +21,19 @@ export default function configureStore(
   } else {
     composeEnhancers = compose(applyMiddleware(thunk));
   }
-  return createStore(rootReducer, initialState as any, composeEnhancers);
+  return createStore(
+    persistReducer({key: 'persistedStore', storage}, rootReducer),
+    composeEnhancers
+  );
+}
+
+// Redux: Store
+const store = configureStore(initialState);
+
+// Middleware: Redux Persist Persister
+let persistor = persistStore(store);
+
+export default store;
+export {
+  persistor
 }
