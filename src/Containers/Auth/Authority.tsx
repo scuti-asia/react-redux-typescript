@@ -5,6 +5,7 @@ import LoginForm from './Login';
 import * as actions from './AuthActions';
 import * as authActions from '../App/AppActions'
 import { ApplicationState } from '../App/AppTypes';
+import { Loading } from '../App';
 
 export interface Props {
   me: any,
@@ -21,7 +22,11 @@ export interface Props {
   updateMe: (data: any) => void,
 }
 
-class AuthorityContainer extends Component<Props> {
+export interface State {
+  isInitialized: boolean
+}
+
+class AuthorityContainer extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -147,9 +152,7 @@ class AuthorityContainer extends Component<Props> {
 
   loading() {
     return (
-      <div className="animated fadeIn pt-1 text-center">
-        <div className="sk-spinner sk-spinner-pulse"/>
-      </div>
+      <Loading />
     );
   }
 
@@ -157,11 +160,13 @@ class AuthorityContainer extends Component<Props> {
     if (this.props.me === null) {
       return (
         <Suspense fallback={this.loading()}>
+          <Loading/>
           <LoginForm />
         </Suspense>
       );
     }
-    return (<div>{this.props.children}</div>);
+
+    return (<div><Loading/>{this.props.children}</div>);
   };
 }
 
