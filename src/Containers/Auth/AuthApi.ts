@@ -1,5 +1,10 @@
 import moment from 'moment';
 
+export interface dataUser {
+  email: string,
+  password: string
+}
+
 export const authentications = {
   accessToken: 'accessToken',
   refreshToken: 'refreshToken',
@@ -12,11 +17,29 @@ export const infoProfile = {
 }
 
 class AuthApi {
-  static authentications() {
+  static authentications(data: dataUser) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(Object.assign({}, authentications));
-        // reject('login wrong');
+        if ( data.email !== 'hieutq@scuti.asia'
+          || data.password !== 'beallyoucanbe'
+        ) {
+          reject('Email and/or password are incorrect.');
+        } else {
+          resolve(Object.assign({}, authentications));
+        }
+      }, 1000);
+    });
+  }
+
+  static reAuthentications(refreshToken: string) {
+    return new Promise((resolve, reject) => {
+      console.log(refreshToken);
+      setTimeout(() => {
+        if (refreshToken !== 'refreshToken') {
+          reject('Unauthorized');
+        } else {
+          resolve(Object.assign({}, authentications));
+        }
       }, 1000);
     });
   }

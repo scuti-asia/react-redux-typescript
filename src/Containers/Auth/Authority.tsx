@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import LoginForm from './Login';
 import * as actions from './AuthActions';
+import * as authActions from '../App/AppActions'
 import { ApplicationState } from '../App/AppTypes';
 
 export interface Props {
@@ -71,7 +72,7 @@ class AuthorityContainer extends Component<Props> {
    */
   async reAuthenticate() {
     //you can use http to re-auth here!
-    return await actions.testReAuthentications()
+    return await actions.testReAuthentications(this.props.identity.refreshToken)
   }
 
   /**
@@ -174,8 +175,8 @@ const mapStateToProps = (state: ApplicationState, ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    requestStarted: () => dispatch(actions.testApi),
-    requestDone: () => dispatch(actions.testApiCompleted),
+    requestStarted: () => dispatch(authActions.isRequesting),
+    requestDone: () => dispatch(authActions.isRequestingCompleted),
     logout: () => dispatch(actions.logout),
     updateIdentity: (res: any) => dispatch(actions.updateIdentity(res)),
     updateMe: (data: any) => dispatch(actions.updateMe(data)),

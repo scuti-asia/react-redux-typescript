@@ -5,6 +5,5 @@ export interface AuthState {
     refreshToken: any,
     expiresIn: any
   },
-  errorDescription: string,
   me: any
 }

@@ -8,7 +8,6 @@ export const initialState: AuthState = {
 		refreshToken: null,
 		expiresIn: null
 	},
-	errorDescription: '',
 	me: null
 }
 

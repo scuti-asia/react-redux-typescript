@@ -14,7 +14,7 @@ export interface Props {
   visible: boolean,
   isError: boolean,
   errorDescription?: string,
-  onLoginButton: () => void;
+  onLoginButton: (data: object) => void;
 }
 
 export interface State {
@@ -50,7 +50,7 @@ class LoginFormComponent extends Component<Props, State> {
 
   onLoginButton(e: any) {
     e.preventDefault();
-    this.props.onLoginButton();
+    this.props.onLoginButton(this.state.fields);
   }
 
   render() {

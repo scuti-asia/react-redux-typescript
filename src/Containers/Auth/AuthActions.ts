@@ -1,6 +1,6 @@
 import * as authConstants from './AuthConstants';
-import * as exampleConstants from '../Example/ExampleConstants';
-import {TestRequestApiAction, TestRequestApiCompletedAction} from '../Example/ExampleActions';
+import * as actions from '../App/AppActions';
+import {AppActions} from '../App/AppActions';
 import AuthApi from './AuthApi';
 import { Dispatch } from "react";
 
@@ -38,17 +38,6 @@ export const updateMe = (me: any): UpdateMeAction => {
   }
 }
 
-export const testApi = (): TestRequestApiAction => {
-  return {
-    type: exampleConstants.TEST_REQUEST_API
-  };
-};
-export const testApiCompleted = (): TestRequestApiCompletedAction => {
-  return {
-    type: exampleConstants.TEST_REQUEST_API_COMPLETED
-  };
-};
-
 export const logout = (): LogoutAction => {
   return {
     type: authConstants.LOGOUT
@@ -56,23 +45,23 @@ export const logout = (): LogoutAction => {
 }
 
 //Thunk actions
-export const testLoginApi = (): any => (
-  dispatch: Dispatch<AuthActions>
+export const testLoginApi = (data: any): any => (
+  dispatch: Dispatch<AuthActions | AppActions>
 ): void => {
-  dispatch(testApi());
+  dispatch(actions.isRequesting());
   AuthApi
-    .authentications()
+    .authentications(data)
     .then(auth => {
       dispatch(updateIdentity(auth));
       AuthApi.getMe()
         .then(data => {
-          dispatch(updateMe(data))
+          dispatch(updateMe(data));
         })
     })
     .catch(err => {
-      console.log("handle error", err);
+      dispatch(actions.raiseErrorMessages(err));
     })
-    .finally(() => dispatch(testApiCompleted()));
+    .finally(() => dispatch(actions.isRequestingCompleted()));
 };
 
 export const testGetMe = (): any => {
@@ -85,10 +74,9 @@ export const testGetMe = (): any => {
     })
 }
 
-export const testReAuthentications = (): any => {
-  return AuthApi.authentications()
+export const testReAuthentications = (refreshToken: string): any => {
+  return AuthApi.reAuthentications(refreshToken)
     .then(data => {
-      console.log(data);
       return data
     })
     .catch(err => {
@@ -96,8 +84,6 @@ export const testReAuthentications = (): any => {
     })
 }
 export type AuthActions = 
-| UpdateIdentityAction
-| UpdateMeAction
-| TestRequestApiAction
-| TestRequestApiCompletedAction
-| LogoutAction
+  | UpdateIdentityAction
+  | UpdateMeAction
+  | LogoutAction
