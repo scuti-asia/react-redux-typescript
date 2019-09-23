@@ -2,12 +2,10 @@ import { createStore, applyMiddleware, Store, compose } from "redux";
 import thunk from "redux-thunk";
 import storage from 'redux-persist/es/storage';
 import {persistReducer, persistStore} from 'redux-persist';
-import rootReducer, { initialState } from "./AppReducers";
+import rootReducer from "./AppReducers";
 import { ApplicationState } from "./AppTypes";
 
-export function configureStore(
-  initialState: ApplicationState
-): Store<ApplicationState> {
+export function configureStore(): Store<ApplicationState> {
   let composeEnhancers;
   if (
     typeof window === "object" &&
@@ -28,7 +26,7 @@ export function configureStore(
 }
 
 // Redux: Store
-const store = configureStore(initialState);
+const store = configureStore();
 
 // Middleware: Redux Persist Persister
 let persistor = persistStore(store);

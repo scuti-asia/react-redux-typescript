@@ -9,9 +9,8 @@ export interface Props {
 
 export class LoadingComponent extends Component<Props> {
   render() {
-    console.log(this.props.loading);
     return (
-      <Modal centered show={this.props.loading} dialogClassName="loading">
+      <Modal centered show={this.props.loading} dialogClassName="loading" onHide={() => false}>
         <Modal.Body>
         <div className="animated fadeIn pt-1 sk-cube-grid text-center">
           <div className="sk-cube sk-cube1"></div>

@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export class LogoutContainer extends Component<Props> {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.logout()
   }
   render() {

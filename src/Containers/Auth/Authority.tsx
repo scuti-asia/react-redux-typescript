@@ -77,7 +77,12 @@ class AuthorityContainer extends Component<Props, State> {
    */
   async reAuthenticate() {
     //you can use http to re-auth here!
-    return await actions.testReAuthentications(this.props.identity.refreshToken)
+    return await actions.testReAuthentications(
+      this.props.identity.refreshToken
+    ).catch((err: any) => {
+      this.props.logout();
+      this.props.requestDone();
+    })
   }
 
   /**
@@ -132,7 +137,7 @@ class AuthorityContainer extends Component<Props, State> {
    *
    * @returns {Promise<*>}
    */
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const response = this.confirmExistence()
     return this.initialized(response)
   }
