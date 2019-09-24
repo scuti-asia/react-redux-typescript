@@ -118,7 +118,8 @@ class AuthorityContainer extends Component<Props, State> {
 
       if (this.shouldReAuthenticate()) {
         response = await this.reAuthenticate();
-        this.props.updateIdentity(response);
+
+        this.props.updateIdentity({...response, authorizedAt: new Date()});
         //if you want save set token on http you can do that actions here
       }
 

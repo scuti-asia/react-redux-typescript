@@ -52,7 +52,7 @@ export const testLoginApi = (data: any): any => (
   AuthApi
     .authentications(data)
     .then(auth => {
-      dispatch(updateIdentity(auth));
+      dispatch(updateIdentity({...auth, authorizedAt: new Date()}));
       AuthApi.getMe()
         .then(data => {
           dispatch(updateMe(data));
