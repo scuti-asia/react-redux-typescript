@@ -36,8 +36,7 @@ const mapStateToProps = (state: ApplicationState, ownProps: any) => {
 }
 
 const Loading = connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 ) (LoadingComponent)
 
 export default Loading

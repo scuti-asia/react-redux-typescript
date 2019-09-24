@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Dispatch } from 'react';
 import { connect } from 'react-redux';
+import { AuthActions } from './AuthActions';
 import * as actions from './AuthActions';
 import {Redirect} from 'react-router-dom';
 
@@ -18,7 +19,7 @@ export class LogoutContainer extends Component<Props> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<AuthActions>) => {
   return {
     logout: () => dispatch(actions.logout())
   };

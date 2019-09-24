@@ -2,19 +2,13 @@ import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import LoginForm from './Login';
-import * as actions from './AuthActions';
-import * as authActions from '../App/AppActions'
+import * as authActions from './AuthActions';
+import * as appActions from '../App/AppActions'
 import { ApplicationState } from '../App/AppTypes';
+import { AuthState } from './AuthTypes';
 import { Loading } from '../App';
 
-export interface Props {
-  me: any,
-  identity: {
-    authorizedAt?: any,
-    accessToken: string,
-    refreshToken: string,
-    expiresIn: number
-  },
+export interface Props extends AuthState {
   requestDone: () => void,
   requestStarted: () => void,
   logout: () => void,
@@ -22,7 +16,7 @@ export interface Props {
   updateMe: (data: any) => void,
 }
 
-export interface State {
+interface State {
   isInitialized: boolean
 }
 
@@ -77,7 +71,7 @@ class AuthorityContainer extends Component<Props, State> {
    */
   async reAuthenticate() {
     //you can use http to re-auth here!
-    return await actions.testReAuthentications(
+    return await authActions.testReAuthentications(
       this.props.identity.refreshToken
     ).catch((err: any) => {
       this.props.logout();
@@ -92,7 +86,7 @@ class AuthorityContainer extends Component<Props, State> {
    */
   async requestMe() {
     //You can use http to request info of user here
-    return await actions.testGetMe
+    return await authActions.testGetMe
   }
 
   /**
@@ -186,11 +180,11 @@ const mapStateToProps = (state: ApplicationState, ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    requestStarted: () => dispatch(authActions.isRequesting),
-    requestDone: () => dispatch(authActions.isRequestingCompleted),
-    logout: () => dispatch(actions.logout),
-    updateIdentity: (res: any) => dispatch(actions.updateIdentity(res)),
-    updateMe: (data: any) => dispatch(actions.updateMe(data)),
+    requestStarted: () => dispatch(appActions.isRequesting),
+    requestDone: () => dispatch(appActions.isRequestingCompleted),
+    logout: () => dispatch(authActions.logout),
+    updateIdentity: (res: any) => dispatch(authActions.updateIdentity(res)),
+    updateMe: (data: any) => dispatch(authActions.updateMe(data)),
   }
 }
 

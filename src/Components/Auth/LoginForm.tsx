@@ -17,7 +17,7 @@ export interface Props {
   onLoginButton: (data: object) => void;
 }
 
-export interface State {
+interface State {
   fields: {
     email: string,
     password: string

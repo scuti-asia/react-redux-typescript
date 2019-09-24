@@ -12,7 +12,7 @@ import { ApplicationState, ApplicationCommonState } from "./AppTypes";
 
 const appCommonState: ApplicationCommonState = {
   loading: false,
-  errorDescription: '',
+  errorDescription: null,
 }
 
 export const AppReducer = (
@@ -24,7 +24,7 @@ export const AppReducer = (
       return {
         ...state,
         loading: true,
-        errorDescription: ''
+        errorDescription: null
       };
     case "IS_REQUESTING_COMPLETED":
       return {
