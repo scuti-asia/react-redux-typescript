@@ -28,6 +28,7 @@ class AuthorityContainer extends Component<Props, State> {
       isInitialized: false,
     };
     this.initialized = this.initialized.bind(this);
+    this.onLogin = this.onLogin.bind(this);
   }
 
   isLogout() {
@@ -156,12 +157,16 @@ class AuthorityContainer extends Component<Props, State> {
     );
   }
 
+  onLogin() {
+
+  }
+
   render() {
     if (this.props.me === null) {
       return (
         <Suspense fallback={this.loading()}>
-          <Loading/>
-          <LoginForm />
+          <Loading />
+          <LoginForm onLogin={this.onLogin}/>
         </Suspense>
       );
     }

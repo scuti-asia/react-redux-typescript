@@ -8,7 +8,7 @@ import { Dispatch } from 'react';
 export const mapStateToProps = (state: ApplicationState) => {
   return {
     visible: state.auth.identity.authorizedAt === null,
-    isError: state.app.errorDescription.length !== null,
+    isError: state.app.errorDescription !== null,
     errorDescription: state.app.errorDescription
   };
 }
