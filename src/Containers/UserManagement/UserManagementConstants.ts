@@ -1,0 +1,3 @@
+export const LOAD_MEMBER_LIST = "LOAD_MEMBER_LIST";
+export type LOAD_MEMBER_LIST_TYPE = typeof LOAD_MEMBER_LIST;
+
