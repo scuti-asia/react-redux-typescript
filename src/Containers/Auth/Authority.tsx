@@ -12,8 +12,8 @@ export interface Props extends AuthState {
   requestDone: () => void,
   requestStarted: () => void,
   logout: () => void,
-  updateIdentity: (data: any) => void,
-  updateMe: (data: any) => void,
+  reAuthenticate: (refreshToken: string) => void,
+  requestMe: () => void
 }
 
 interface State {
@@ -28,7 +28,6 @@ class AuthorityContainer extends Component<Props, State> {
       isInitialized: false,
     };
     this.initialized = this.initialized.bind(this);
-    this.onLogin = this.onLogin.bind(this);
   }
 
   isLogout() {
@@ -51,7 +50,7 @@ class AuthorityContainer extends Component<Props, State> {
    * @returns {boolean}
    */
   shouldReAuthenticate() {
-    const expiresIn = moment(this.props.identity.expiresIn * 1000, 'x');
+    const expiresIn = moment(this.props.identity.expiresIn, 'x');
     // Expire within 5 minutes.
     return expiresIn.isBefore(moment().add(5, 'minutes'));
   }
@@ -71,13 +70,7 @@ class AuthorityContainer extends Component<Props, State> {
    * @returns {Promise<void>}
    */
   async reAuthenticate() {
-    //you can use http to re-auth here!
-    return await authActions.testReAuthentications(
-      this.props.identity.refreshToken
-    ).catch((err: any) => {
-      this.props.logout();
-      this.props.requestDone();
-    })
+    return await this.props.reAuthenticate(this.props.identity.refreshToken);
   }
 
   /**
@@ -87,7 +80,7 @@ class AuthorityContainer extends Component<Props, State> {
    */
   async requestMe() {
     //You can use http to request info of user here
-    return await authActions.testGetMe
+    return await this.props.requestMe()
   }
 
   /**
@@ -102,7 +95,7 @@ class AuthorityContainer extends Component<Props, State> {
    * @param {function} cb Callback after perform the method
    * @returns {Promise<*>}
    */
-  async confirmExistence(cb = undefined) {
+  async confirmExistence() {
     let response;
     if (!this.isLogout()) {
       this.props.requestStarted();
@@ -113,14 +106,11 @@ class AuthorityContainer extends Component<Props, State> {
 
       if (this.shouldReAuthenticate()) {
         response = await this.reAuthenticate();
-
-        this.props.updateIdentity({...response, authorizedAt: new Date()});
         //if you want save set token on http you can do that actions here
       }
 
       if (this.shouldRequestMe()) {
         response = await this.requestMe();
-        this.props.updateMe(response);
       }
     }
     return response;
@@ -157,16 +147,12 @@ class AuthorityContainer extends Component<Props, State> {
     );
   }
 
-  onLogin() {
-
-  }
-
   render() {
     if (this.props.me === null) {
       return (
         <Suspense fallback={this.loading()}>
           <Loading />
-          <LoginForm onLogin={this.onLogin}/>
+          <LoginForm />
         </Suspense>
       );
     }
@@ -185,11 +171,15 @@ const mapStateToProps = (state: ApplicationState, ownProps: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    requestStarted: () => dispatch(appActions.isRequesting),
-    requestDone: () => dispatch(appActions.isRequestingCompleted),
-    logout: () => dispatch(authActions.logout),
-    updateIdentity: (res: any) => dispatch(authActions.updateIdentity(res)),
-    updateMe: (data: any) => dispatch(authActions.updateMe(data)),
+    requestStarted: () => dispatch(appActions.isRequesting()),
+    requestDone: () => {
+      dispatch(appActions.isRequestingCompleted())
+    },
+    logout: () => {
+      dispatch(authActions.logout())
+    },
+    requestMe: () => dispatch(authActions.getMe()),
+    reAuthenticate: (refreshToken: string) => dispatch(authActions.reAuthenticate(refreshToken))
   }
 }
 

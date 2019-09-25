@@ -8,7 +8,7 @@ export interface dataUser {
 export const authentications = {
   accessToken: 'accessToken',
   refreshToken: 'refreshToken',
-  expiresIn: moment(new Date()).add('30', 'minutes').valueOf(),
+  expiresIn: moment().add('30', 'minutes').valueOf(),
 }
 
 export const infoProfile = {
@@ -33,7 +33,6 @@ class AuthApi {
 
   static reAuthentications(refreshToken: string) {
     return new Promise((resolve, reject) => {
-      console.log(refreshToken);
       setTimeout(() => {
         if (refreshToken !== 'refreshToken') {
           reject('Unauthorized');

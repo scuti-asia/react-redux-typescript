@@ -45,7 +45,7 @@ export const logout = (): LogoutAction => {
 }
 
 //Thunk actions
-export const testLoginApi = (data: any): any => (
+export const authentications = (data: any): any => (
   dispatch: Dispatch<AuthActions | AppActions>
 ): void => {
   dispatch(actions.isRequesting());
@@ -64,23 +64,28 @@ export const testLoginApi = (data: any): any => (
     .finally(() => dispatch(actions.isRequestingCompleted()));
 };
 
-export const testGetMe = (): any => {
-  return AuthApi.getMe()
+export const getMe = (): any => (
+  dispatch: Dispatch<AuthActions | AppActions>
+): void => {
+  AuthApi.getMe()
     .then(data => {
-      return data;
+      dispatch(updateMe(data))
     })
     .catch(err => {
-      console.log("handle error", err);
+      dispatch(actions.raiseErrorMessages(err));
     })
 }
 
-export const testReAuthentications = (refreshToken: string): any => {
-  return AuthApi.reAuthentications(refreshToken)
+export const reAuthenticate = (refreshToken: string): any => (
+  dispatch: Dispatch<AuthActions | AppActions>
+): void => {
+  AuthApi.reAuthentications(refreshToken)
     .then(data => {
-      return data
+      dispatch(updateIdentity({...data, authorizedAt: new Date()}))
     })
     .catch(err => {
-      console.log("handle error", err);
+      dispatch(logout());
+      dispatch(actions.isRequestingCompleted())
     })
 }
 export type AuthActions = 

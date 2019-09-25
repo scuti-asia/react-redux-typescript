@@ -14,8 +14,7 @@ export interface Props {
   visible: boolean,
   isError: boolean,
   errorDescription?: string,
-  onLoginButton: (data: object) => void;
-  onLogin: () => void;
+  onLoginButton: (data: object) => void,
 }
 
 interface State {

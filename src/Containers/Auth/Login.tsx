@@ -15,7 +15,7 @@ export const mapStateToProps = (state: ApplicationState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch<AuthActions>) => {
   return {
-    onLoginButton: (data: any) => dispatch(actions.testLoginApi(data))
+    onLoginButton: (data: any) => dispatch(actions.authentications(data))
   };
 }
 
