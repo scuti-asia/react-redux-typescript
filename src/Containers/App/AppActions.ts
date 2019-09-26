@@ -14,6 +14,11 @@ export interface RaiseErrorMessagesAction {
   payload: string
 }
 
+export interface ChangeLanguageAction {
+  type: constants.CHANGE_LANGUAGE_TYPE,
+  payload: string
+}
+
 //actions creators
 
 export const isRequesting = (): IsRequestingApiAction => {
@@ -35,7 +40,15 @@ export const raiseErrorMessages = (error: string): RaiseErrorMessagesAction => {
   }
 }
 
+export const changeLanguage = (locale: string): ChangeLanguageAction => {
+  return {
+    type: constants.CHANGE_LANGUAGE,
+    payload: locale
+  }
+}
+
 export type AppActions =
   | IsRequestingApiAction
   | IsRequestingCompletedAction
   | RaiseErrorMessagesAction
+  | ChangeLanguageAction
