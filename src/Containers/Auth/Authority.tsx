@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
+import {injectIntl} from 'react-intl';
 import moment from 'moment';
 import LoginForm from './Login';
 import * as authActions from './AuthActions';
@@ -13,7 +14,8 @@ export interface Props extends AuthState {
   requestStarted: () => void,
   logout: () => void,
   reAuthenticate: (refreshToken: string) => void,
-  requestMe: () => void
+  requestMe: () => void,
+  intl: any
 }
 
 interface State {
@@ -186,6 +188,6 @@ const mapDispatchToProps = (dispatch: any) => {
 const Authority = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthorityContainer)
+)(injectIntl(AuthorityContainer))
 
 export default Authority

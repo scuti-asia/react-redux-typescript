@@ -1,10 +1,12 @@
 //routers on sidebar
-const navigation = [
-  {
-    name: 'Todo',
-    url: '/admin',
-    icon: 'icon-speedometer',
-  }
-];
+const navigation = (intl: any) => {
+  return [
+    {
+      name: intl.formatMessage({id: 'todo'}),
+      url: '/admin',
+      icon: 'icon-speedometer',
+    }
+  ]
+};
 
-export default navigation;
+export {navigation};

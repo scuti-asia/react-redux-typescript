@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Button } from "react-bootstrap";
+import { FormattedMessage } from 'react-intl';
 
 export interface Props {
   filtering: string;
@@ -20,7 +21,7 @@ const TodoFilterComponent: FunctionComponent<Props> = props => {
     if (item === filtering)
       return (
         <Button variant="link" key={key} disabled>
-          {item.toUpperCase()}
+          <FormattedMessage id={item} />
         </Button>
       );
     else
@@ -30,7 +31,7 @@ const TodoFilterComponent: FunctionComponent<Props> = props => {
           key={key}
           onClick={() => handleOnFilterChange(item)}
         >
-          {item.toUpperCase()}
+          <FormattedMessage id={item} />
         </Button>
       );
   });

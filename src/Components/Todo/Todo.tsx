@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TodoListComponent, { TodoList } from "./TodoList";
 import TodoFormComponent from "./TodoForm";
 import { Row, Button } from "react-bootstrap";
+import { FormattedMessage } from 'react-intl';
 import TodoFilterComponent from "./TodoFilter";
 import Container from '../AdminLayout';
 
@@ -12,6 +13,7 @@ export interface Props {
   toggleTodoItem?: (id: string) => void;
   onChangeFilter?: (filterType: string) => void;
   onTestApi: () => void;
+  intl: any
 }
 
 export default class TodoComponent extends Component<Props> {
@@ -28,10 +30,9 @@ export default class TodoComponent extends Component<Props> {
           return true;
       }
     });
-
     return (
       <Container
-        pageTitle="Todo"
+        pageTitle="todo"
       >
         <Row className="justify-content-md-center">
           <TodoFormComponent onAddTodo={this.props.addTodoItem} />
@@ -45,7 +46,7 @@ export default class TodoComponent extends Component<Props> {
           />
         </Row>
         <Row>
-          <Button onClick={() => this.props.onTestApi()}>Test API</Button>
+          <Button onClick={() => this.props.onTestApi()}><FormattedMessage id="Test Api" /></Button>
         </Row>
       </Container>
     );
