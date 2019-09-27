@@ -1,5 +1,4 @@
-import en from './lang/en';
-import vi from './lang/vi';
+import en, {vi} from '../../lang';
 
 interface MessagesType {
   [key: string]: any,
