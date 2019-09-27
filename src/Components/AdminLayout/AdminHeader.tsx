@@ -15,7 +15,8 @@ import avatar from "../../Assets/avatar.jpg";
 
 interface Props {
   locale: string,
-  onChangeLanguage: (locale: string) => void
+  onChangeLanguage: (locale: string) => void,
+  showAvatar: boolean
 }
 
 class AdminHeader extends Component<Props> {
@@ -61,7 +62,8 @@ class AdminHeader extends Component<Props> {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <AppHeaderDropdown>
+
+              {this.props.showAvatar && <AppHeaderDropdown>
                 <NavDropdown title={
                   <img src={avatar} className="img-avatar" alt='avatar'/>
                 }
@@ -69,7 +71,8 @@ class AdminHeader extends Component<Props> {
                 >
                   <NavDropdown.Item ><Link to="/admin/logout"><FormattedMessage id="Logout" /></Link></NavDropdown.Item>
                 </NavDropdown>
-              </AppHeaderDropdown>
+              </AppHeaderDropdown>}
+
             </Nav>
           </Navbar.Collapse>
         </Navbar>

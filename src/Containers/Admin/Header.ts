@@ -7,6 +7,7 @@ import { Dispatch } from 'react';
 const mapStateToProps = (state: any, ownProps: any) => {
   let newState = Object.assign({}, ownProps);
   newState.locale = state.app.locale;
+  newState.showAvatar = state.auth.me !== null
   return newState;
 }
 

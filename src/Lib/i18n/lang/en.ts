@@ -10,5 +10,8 @@ export default {
     'What needs to be done?': 'What needs to be done?',
     'all': 'ALL',
     'completed': 'COMPLETED',
-    'incompleted': 'INCOMPLETED'
+    'incompleted': 'INCOMPLETED',
+    'Login': 'Login',
+    'E-mail address': 'E-mail address',
+    'Password': 'Password'
 }

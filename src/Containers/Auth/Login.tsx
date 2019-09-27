@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import LoginForm from '../../Components/Auth';
+import { injectIntl } from 'react-intl';
 import { AuthActions } from './AuthActions';
 import * as actions from './AuthActions';
 import { ApplicationState } from '../App/AppTypes';
@@ -22,5 +23,5 @@ export const mapDispatchToProps = (dispatch: Dispatch<AuthActions>) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (LoginForm);
+) (injectIntl(LoginForm));
 
