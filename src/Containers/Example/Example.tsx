@@ -1,5 +1,5 @@
 import Todo from "../../Components/Todo";
-import {injectIntl} from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { ApplicationState } from "../App/AppTypes";
 import * as actions from "./ExampleActions";
 import { connect } from "react-redux";

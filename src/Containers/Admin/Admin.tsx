@@ -17,7 +17,7 @@ import { AdminFooter } from '../../Components/AdminLayout';
 import AdminHeader from './Header';
 import { Authority } from '../../Containers/Auth'
 import routes from './AdminRoutes';
-import {navigation} from './AdminNavigation';
+import { navigation } from './AdminNavigation';
 
 interface Props {
   intl: any

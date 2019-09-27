@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
-import {injectIntl} from 'react-intl';
+import { injectIntl } from 'react-intl';
 import moment from 'moment';
 import LoginForm from './Login';
 import * as authActions from './AuthActions';

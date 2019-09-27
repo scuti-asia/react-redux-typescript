@@ -9,4 +9,4 @@ const navigation = (intl: any) => {
   ]
 };
 
-export {navigation};
+export { navigation };
