@@ -1,4 +1,4 @@
-import en, {vi} from '../../lang';
+import { en, vi } from '../../lang';
 
 interface MessagesType {
   [key: string]: any,
@@ -7,5 +7,5 @@ interface MessagesType {
 const messages: MessagesType = {en, vi};
 
 export default {
-  messages: messages
+  messages
 }
