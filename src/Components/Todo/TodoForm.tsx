@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import {injectIntl} from 'react-intl';
 import { Form } from "react-bootstrap";
 
 export interface Props {
   onAddTodo?: (title: string) => void;
+  intl: any
 }
 
-export default class TodoFormComponent extends Component<Props> {
+class TodoFormComponent extends Component<Props> {
   readonly state: {
     tmpTitle: string;
   };
@@ -38,10 +40,12 @@ export default class TodoFormComponent extends Component<Props> {
         type="text"
         size="lg"
         value={this.state.tmpTitle}
-        placeholder="What needs to be done?"
+        placeholder={this.props.intl.formatMessage({id: 'What needs to be done?'})}
         onChange={this.onTextChange}
         onKeyDown={this.handleKeyDown}
       />
     );
   }
 }
+
+export default injectIntl(TodoFormComponent)

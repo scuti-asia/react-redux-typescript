@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import {injectIntl} from 'react-intl';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   AppFooter,
@@ -12,12 +13,17 @@ import {
   // @ts-ignore
 } from '@coreui/react';
 
-import { AdminFooter, AdminHeader } from '../../Components/AdminLayout';
+import { AdminFooter } from '../../Components/AdminLayout';
+import AdminHeader from './Header';
 import { Authority } from '../../Containers/Auth'
 import routes from './AdminRoutes';
-import navigation from './AdminNavigation';
+import { navigation } from './AdminNavigation';
 
-class AdminLayoutComponent extends Component {
+interface Props {
+  intl: any
+}
+
+class AdminLayoutComponent extends Component<Props> {
   loading() {
     return (
       <div className="animated fadeIn pt-1 text-center">
@@ -40,7 +46,7 @@ class AdminLayoutComponent extends Component {
               <AppSidebarHeader/>
               <AppSidebarForm/>
               <Suspense fallback={this.loading()}>
-                <AppSidebarNav navConfig={{items: navigation}} {...this.props} />
+                <AppSidebarNav navConfig={{items: navigation(this.props.intl)}} {...this.props} />
               </Suspense>
               <AppSidebarFooter/>
               <AppSidebarMinimizer/>
@@ -54,7 +60,7 @@ class AdminLayoutComponent extends Component {
                       exact={route.exact}
                       render={props => (
                         <route.component {...props} />
-                      )} 
+                      )}
                     />)
                     : (null);
                 },
@@ -73,4 +79,4 @@ class AdminLayoutComponent extends Component {
   }
 }
 
-export default AdminLayoutComponent;
+export default injectIntl(AdminLayoutComponent);

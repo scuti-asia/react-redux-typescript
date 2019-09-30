@@ -9,5 +9,6 @@ export interface ApplicationState {
 
 export interface ApplicationCommonState {
   loading: boolean,
-  errorDescription?: any
+  errorDescription?: any,
+  locale: string
 }

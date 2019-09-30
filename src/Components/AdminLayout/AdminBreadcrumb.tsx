@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 export interface Props {
@@ -8,7 +9,7 @@ export interface Props {
 const Breadcrumbs: FunctionComponent<Props> = (props) => {
   return (
     <Breadcrumb>
-      <Breadcrumb.Item active>{props.pageTitle}</Breadcrumb.Item>
+      <Breadcrumb.Item active><FormattedMessage id={props.pageTitle} /></Breadcrumb.Item>
     </Breadcrumb>
   )
 }

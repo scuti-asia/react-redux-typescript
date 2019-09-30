@@ -13,6 +13,7 @@ import { ApplicationState, ApplicationCommonState } from "./AppTypes";
 const appCommonState: ApplicationCommonState = {
   loading: false,
   errorDescription: null,
+  locale: 'en'
 }
 
 export const AppReducer = (
@@ -35,7 +36,13 @@ export const AppReducer = (
       return {
         ...state,
         errorDescription: action.payload
+      };
+    case "CHANGE_LANGUAGE": {
+      return {
+        ...state,
+        locale: action.payload
       }
+    }
     default:
       return state;
   }
