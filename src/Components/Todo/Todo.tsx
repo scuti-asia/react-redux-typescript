@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoListComponent, { TodoList } from "./TodoList";
 import TodoFormComponent from "./TodoForm";
+import MoldableTable from '../Parts/Table/MoldableTable';
 import { Row, Button } from "react-bootstrap";
 import { FormattedMessage } from 'react-intl';
 import TodoFilterComponent from "./TodoFilter";
@@ -19,7 +20,7 @@ export interface Props {
 export default class TodoComponent extends Component<Props> {
   render() {
     let { todos, filter } = this.props;
-
+    console.log(todos)
     let showTodos = todos.filter(item => {
       switch (filter) {
         case "incompleted":
@@ -30,6 +31,7 @@ export default class TodoComponent extends Component<Props> {
           return true;
       }
     });
+
     return (
       <Container
         pageTitle="todo"
@@ -47,6 +49,9 @@ export default class TodoComponent extends Component<Props> {
         </Row>
         <Row>
           <Button onClick={() => this.props.onTestApi()}><FormattedMessage id="Test Api" /></Button>
+        </Row>
+        <Row>
+          
         </Row>
       </Container>
     );

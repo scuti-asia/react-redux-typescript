@@ -50,8 +50,8 @@ class LoginFormComponent extends Component<Props, State> {
   }
 
   handleChange(e: any) {
-    const {fields} = this.state;
-    const newValue = {...fields, [e.currentTarget.name]: e.currentTarget.value }
+    const { fields } = this.state;
+    const newValue = { ...fields, [e.currentTarget.name]: e.currentTarget.value }
     this.setState({fields: newValue});
   }
 

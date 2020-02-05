@@ -12,16 +12,16 @@ export const authentications = {
 }
 
 export const infoProfile = {
-  email: 'hieutq@scuti.asia',
-  label: "Ta Hieu",
+  email: 'admin@scuti.asia',
+  label: "I'm Admin",
 }
 
 class AuthApi {
   static authentications(data: dataUser) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if ( data.email !== 'hieutq@scuti.asia'
-          || data.password !== 'beallyoucanbe'
+        if ( data.email !== 'admin@scuti.asia'
+          || data.password !== 'scuti@123'
         ) {
           reject('Email and/or password are incorrect.');
         } else {
